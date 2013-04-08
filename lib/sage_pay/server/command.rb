@@ -7,7 +7,7 @@ module SagePay
 
       self.vps_protocol = "2.23"
 
-      attr_accessor :mode, :vendor, :vendor_tx_code
+      attr_accessor :mode, :vendor, :vendor_tx_code, :encryption_key
 
       validates_presence_of :vps_protocol, :mode, :tx_type, :vendor,
         :vendor_tx_code

@@ -8,7 +8,8 @@ module SagePay
     #     SagePay::Server.default_registration_options = {
     #       :mode => :live,
     #       :vendor => "rubaidh",
-    #       :notification_url => "http://test.host/notification"
+    #       :notification_url => "http://test.host/notification",
+    #       :encryption_key => 'xxxxx'
     #     }
     #
     # ... which you'll want to stick in config/initializers/sage_pay.rb or one
