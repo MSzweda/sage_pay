@@ -13,6 +13,8 @@ module SagePay
     # Basic
     EMAIL_FORMAT = /@/.freeze
 
+    CREDIT_CARDS    = %w{VISA MC DELTA SOLO MAESTRO UKE
+                         AMEX DC JCB LASER PAYPAL}.freeze
     COUNTRY_OPTIONS = %w{AF AX AL DZ AS AD AO AI AQ AG AR AM AW AU AT AZ BS BH
                          BD BB BY BE BZ BJ BM BT BO BQ BA BW BV BR IO BN BG BF
                          BI KH CM CA CV KY CF TD CL CN CX CC CO KM CG CD CK CR
