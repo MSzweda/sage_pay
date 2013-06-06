@@ -1,5 +1,5 @@
 module SagePay
-  module Server
+  module Utils
     class Address
       include ActiveModel::Validations
       include SagePay::Validators

@@ -4,7 +4,7 @@ if run_integration_specs?
   describe SagePay::Server, "integration specs" do
     before(:each) do
       SagePay::Server.default_registration_options = {
-        :mode => :simulator,
+        :mode => :server_simulator,
         :vendor => ENV["VENDOR_NAME"],
         :notification_url => 'http://test.host/notification'
       }

@@ -1,6 +1,6 @@
 module SagePay
   module Server
-    class Repeat < Command
+    class Repeat < Utils::Command
       self.tx_type = :repeat
 
       attr_accessor :currency, :description, :related_transaction, :cv2

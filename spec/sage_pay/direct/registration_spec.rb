@@ -104,8 +104,8 @@ describe Registration do
       registration.errors[:tx_type].should include("is not in the list")
     end
 
-    it "should allow the mode to be one of :simulator, :test or :live" do
-      registration = direct_registration_factory(:mode => :simulator)
+    it "should allow the mode to be one of :direct_simulator, :test or :live" do
+      registration = direct_registration_factory(:mode => :direct_simulator)
       registration.should be_valid
 
       registration = direct_registration_factory(:mode => :test)
@@ -209,7 +209,7 @@ describe Registration do
 
   describe "url generation" do
     it "should pick the correct url for the simulator mode" do
-      registration = direct_registration_factory(:mode => :simulator)
+      registration = direct_registration_factory(:mode => :direct_simulator)
       registration.url.should == "https://test.sagepay.com/simulator/VSPDirectGateway.asp"
     end
 
@@ -267,7 +267,7 @@ describe Registration do
         )
 
         @registration = direct_registration_factory(
-          :mode             => :simulator,
+          :mode             => :direct_simulator,
           :tx_type          => :payment,
           :vendor           => "vendorname",
           :vendor_tx_code   => "unique-tx-code",
@@ -539,7 +539,7 @@ describe Registration do
         @mock_response = mock("Transaction registration response")
         @registration = direct_registration_factory
         @registration.stub(:post).and_return(@mock_http_response)
-        RegistrationResponse.stub(:from_response_body).and_return @mock_response
+        SagePay::Direct::RegistrationResponse.stub(:from_response_body).and_return @mock_response
       end
 
       it "should return a newly created RegistrationResponse with the response" do
@@ -548,7 +548,7 @@ describe Registration do
       end
 
       it "should pass the response body to RegistrationResponse.from_response_body to let it parse and initialize" do
-        RegistrationResponse.should_receive(:from_response_body).with("mock response body")
+        SagePay::Direct::RegistrationResponse.should_receive(:from_response_body).with("mock response body")
         @registration.run!
       end
 

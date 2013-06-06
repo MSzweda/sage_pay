@@ -1,6 +1,6 @@
 module SagePay
   module Server
-    class Cancel < Command
+    class Cancel < Utils::Command
       self.tx_type = :cancel
 
       attr_accessor :vps_tx_id, :security_key

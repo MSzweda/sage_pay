@@ -1,6 +1,6 @@
 module Factories
+  include SagePay
   include SagePay::Server
-
   include SagePay::Direct
 
   def model_factory(model_name, overrides = {})
@@ -17,7 +17,7 @@ module Factories
       :post_code   => "UI62 7BJ",
       :country     => "GB"
     }
-    Address.new(defaults.merge(overrides))
+    SagePay::Utils::Address.new(defaults.merge(overrides))
   end
 
   def card_details_factory(overrides = {})
@@ -28,7 +28,7 @@ module Factories
       :expiry_date => "12#{Time.new(Time.now.year+1).strftime("%Y")}",
       :card_type   => "VISA"
     }
-    CardDetails.new(defaults.merge(overrides))
+    SagePay::Direct::CardDetails.new(defaults.merge(overrides))
   end
 
   def registration_factory(overrides = {})
@@ -44,7 +44,7 @@ module Factories
       :billing_address  => address_factory,
       :delivery_address => address_factory
     }
-    Registration.new(defaults.merge(overrides))
+    SagePay::Server::Registration.new(defaults.merge(overrides))
   end
 
   def direct_registration_factory(overrides = {})
@@ -60,19 +60,19 @@ module Factories
       :billing_address  => address_factory,
       :delivery_address => address_factory
     }
-    Registration.new(defaults.merge(overrides))
+    SagePay::Direct::Registration.new(defaults.merge(overrides))
   end
 
   def registration_response_factory(overrides = {})
     defaults = {
     }
-    RegistrationResponse.new(defaults.merge(overrides))
+    SagePay::Server::RegistrationResponse.new(defaults.merge(overrides))
   end
 
   def direct_registration_response_factory(overrides = {})
     defaults = {
     }
-    RegistrationResponse.new(defaults.merge(overrides))
+    SagePay::Direct::RegistrationResponse.new(defaults.merge(overrides))
   end
 
   def notification_factory(overrides = {})

@@ -1,6 +1,6 @@
 module SagePay
   module Server
-    class Release < Command
+    class Release < Utils::Command
       self.tx_type = :release
 
       attr_accessor :vps_tx_id, :security_key, :tx_auth_no

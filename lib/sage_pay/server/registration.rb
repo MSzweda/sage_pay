@@ -1,6 +1,6 @@
 module SagePay
   module Server
-    class Registration < Command
+    class Registration < Utils::Command
       attr_accessor :currency, :description, :notification_url,
         :billing_address, :delivery_address, :customer_email, :basket,
         :allow_gift_aid, :apply_avs_cv2, :apply_3d_secure, :profile,
@@ -42,7 +42,7 @@ module SagePay
         elsif @response.failed?
           raise RuntimeError, "Registration failed"
         else
-          @signature_verification_details ||= SignatureVerificationDetails.new(vendor, @response.security_key)
+          @signature_verification_details ||= SagePay::Utils::SignatureVerificationDetails.new(vendor, @response.security_key)
         end
       end
 

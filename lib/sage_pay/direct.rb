@@ -41,7 +41,7 @@ module SagePay
 
     def self.registration(attributes)
       defaults = {
-        :vendor_tx_code   => TransactionCode.random,
+        :vendor_tx_code   => SagePay::Utils::TransactionCode.random,
         :delivery_address => attributes[:billing_address]
       }.merge(default_registration_options)
 
@@ -64,7 +64,7 @@ module SagePay
 
     def self.refund(attributes = {})
       defaults = {
-        :vendor_tx_code => TransactionCode.random,
+        :vendor_tx_code => SagePay::Utils::TransactionCode.random,
       }.merge(default_options)
 
       SagePay::Direct::Refund.new(defaults.merge(attributes))
@@ -72,7 +72,7 @@ module SagePay
 
     def self.authorise(attributes = {})
       defaults = {
-        :vendor_tx_code => TransactionCode.random,
+        :vendor_tx_code => SagePay::Utils::TransactionCode.random,
       }.merge(default_options)
 
       SagePay::Direct::Authorise.new(defaults.merge(attributes))
@@ -87,7 +87,7 @@ module SagePay
 
     def self.repeat(attributes = {})
       defaults = {
-        :vendor_tx_code => TransactionCode.random,
+        :vendor_tx_code => SagePay::Utils::TransactionCode.random,
       }.merge(default_options)
 
       SagePay::Direct::Repeat.new(defaults.merge(attributes))

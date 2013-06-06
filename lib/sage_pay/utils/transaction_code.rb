@@ -1,5 +1,5 @@
 module SagePay
-  module Direct
+  module Utils
     class TransactionCode
       def self.random
         new.random

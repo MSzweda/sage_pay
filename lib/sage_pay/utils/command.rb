@@ -1,5 +1,5 @@
 module SagePay
-  module Direct
+  module Utils
     class Command
       include ActiveModel::Validations
 
@@ -16,7 +16,7 @@ module SagePay
       validates_length_of :vendor,           :maximum => 15
       validates_length_of :vendor_tx_code,   :maximum => 40
 
-      validates_inclusion_of :mode, :allow_blank => true, :in => [ :showpost, :simulator, :test, :live ]
+      validates_inclusion_of :mode, :allow_blank => true, :in => [ :showpost, :server_simulator, :direct_simulator, :test, :live ]
 
       def self.decimal_accessor(*attrs)
         attrs.each do |attr|
@@ -49,8 +49,10 @@ module SagePay
         case mode
         when :showpost
           "https://test.sagepay.com/showpost/showpost.asp?Service=#{simulator_service}"
-        when :simulator
+        when :direct_simulator
           "https://test.sagepay.com/simulator/VSPDirectGateway.asp"
+        when :server_simulator
+          "https://test.sagepay.com/simulator/VSPServerGateway.asp?Service=#{simulator_service}"
         when :test
           "https://test.sagepay.com/gateway/service/#{live_service}.vsp"
         when :live

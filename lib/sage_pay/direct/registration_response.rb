@@ -5,8 +5,7 @@ module SagePay
 
       self.key_converter = key_converter.merge({
         "VPSTxId"      => :vps_tx_id,
-        "SecurityKey"  => :security_key,
-        "NextURL"      => :next_url
+        "SecurityKey"  => :security_key
       })
     end
   end

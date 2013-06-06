@@ -1,6 +1,6 @@
 module SagePay
   module Server
-    class Authorise < Command
+    class Authorise < Utils::Command
       self.tx_type = :authorise
 
       attr_accessor :description, :related_transaction, :apply_avs_cv2

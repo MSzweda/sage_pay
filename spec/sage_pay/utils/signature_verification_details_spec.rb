@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-include SagePay::Server
+include SagePay::Utils
 describe SignatureVerificationDetails do
   before(:each) do
     @sig_details = SignatureVerificationDetails.new("vendor", "security key")

@@ -1,5 +1,5 @@
 module SagePay
-  module Direct
+  module Utils
     class SignatureVerificationDetails
       attr_reader :vendor, :security_key
 

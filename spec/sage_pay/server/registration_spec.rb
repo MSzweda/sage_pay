@@ -106,8 +106,8 @@ describe Registration do
       registration.errors[:tx_type].should include("is not in the list")
     end
 
-    it "should allow the mode to be one of :simulator, :test or :live" do
-      registration = registration_factory(:mode => :simulator)
+    it "should allow the mode to be one of :server_simulator, :test or :live" do
+      registration = registration_factory(:mode => :server_simulator)
       registration.should be_valid
 
       registration = registration_factory(:mode => :test)
@@ -210,8 +210,8 @@ describe Registration do
   end
 
   describe "url generation" do
-    it "should pick the correct url for the simulator mode" do
-      registration = registration_factory(:mode => :simulator)
+    it "should pick the correct url for the server_simulator mode" do
+      registration = registration_factory(:mode => :server_simulator)
       registration.url.should == "https://test.sagepay.com/simulator/VSPServerGateway.asp?Service=VendorRegisterTx"
     end
 
@@ -262,7 +262,7 @@ describe Registration do
         )
 
         @registration = registration_factory(
-          :mode             => :simulator,
+          :mode             => :server_simulator,
           :tx_type          => :payment,
           :vendor           => "vendorname",
           :vendor_tx_code   => "unique-tx-code",
@@ -522,7 +522,7 @@ describe Registration do
         @mock_response = mock("Transaction registration response")
         @registration = registration_factory
         @registration.stub(:post).and_return(@mock_http_response)
-        RegistrationResponse.stub(:from_response_body).and_return @mock_response
+        SagePay::Server::RegistrationResponse.stub(:from_response_body).and_return @mock_response
       end
 
       it "should return a newly created RegistrationResponse with the response" do
@@ -531,7 +531,7 @@ describe Registration do
       end
 
       it "should pass the response body to RegistrationResponse.from_response_body to let it parse and initialize" do
-        RegistrationResponse.should_receive(:from_response_body).with("mock response body")
+        SagePay::Server::RegistrationResponse.should_receive(:from_response_body).with("mock response body")
         @registration.run!
       end
 
@@ -550,7 +550,7 @@ describe Registration do
       it "should allow us to register twice if we change the vendor transaction code in between times" do
         @registration.run!
         lambda {
-          @registration.vendor_tx_code = TransactionCode.random
+          @registration.vendor_tx_code = SagePay::Utils::TransactionCode.random
           @registration.run!.should == @mock_response
         }.should_not raise_error(RuntimeError, "This vendor transaction code has already been registered")
       end

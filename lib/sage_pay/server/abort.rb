@@ -1,6 +1,6 @@
 module SagePay
   module Server
-    class Abort < Command
+    class Abort < Utils::Command
       self.tx_type = :abort
 
       attr_accessor :vps_tx_id, :security_key, :tx_auth_no

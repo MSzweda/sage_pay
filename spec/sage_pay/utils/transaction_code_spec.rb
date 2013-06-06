@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-include SagePay::Server
+include SagePay::Utils
 
 describe TransactionCode do
   it "should generate a transaction code" do

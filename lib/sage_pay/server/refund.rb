@@ -1,6 +1,6 @@
 module SagePay
   module Server
-    class Refund < Command
+    class Refund < Utils::Command
       self.tx_type = :refund
 
       attr_accessor :currency, :description, :related_transaction

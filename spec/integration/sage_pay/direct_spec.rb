@@ -4,7 +4,7 @@ if run_integration_specs?
   describe SagePay::Direct, "integration specs" do
     before(:each) do
       SagePay::Direct.default_registration_options = {
-        :mode => :simulator,
+        :mode => :direct_simulator,
         :vendor => ENV["VENDOR_NAME"]
       }
     end
