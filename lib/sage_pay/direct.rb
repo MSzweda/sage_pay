@@ -5,10 +5,10 @@ module SagePay
     end
     # NOTE: Expected to be something along the lines of:
     #
-    #     SagePay::Server.default_registration_options = {
+    #     SagePay::Direct.default_registration_options = {
     #       :mode => :live,
     #       :vendor => "rubaidh",
-    #       :notification_url => "http://test.host/notification",
+    #       :three_d_secure_term_url => "http://test.host/notification",
     #       :encryption_key => 'xxxxx'
     #     }
     #
@@ -20,7 +20,7 @@ module SagePay
     # rest are relevant to all requests.
     # FIXME: This should be Hash#only instead of Hash#except!
     def self.default_options
-      default_registration_options.except(:notification_url, :profile)
+      default_registration_options.except(:profile)
     end
 
     def self.related_transaction(attributes = {})

@@ -4,7 +4,8 @@ module SagePay
       attr_accessor :currency, :description, :card_details,
         :billing_address, :delivery_address, :customer_email, :basket,
         :allow_gift_aid, :apply_avs_cv2, :apply_3d_secure, :profile,
-        :billing_agreement, :account_type, :pay_pal_callback_url
+        :billing_agreement, :account_type, :pay_pal_callback_url,
+        :three_d_secure_term_url
       decimal_accessor :amount
 
       validates_presence_of :amount, :currency, :description, :card_details,
