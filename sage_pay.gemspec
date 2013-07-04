@@ -10,7 +10,6 @@ Gem::Specification.new do |s|
   s.description = "This is a Ruby library for integrating with SagePay. SagePay is a payment\ngateway for accepting credit card payments through your web app.\n"
   s.email = "mathie@woss.name"
   s.extra_rdoc_files = ["README.md", "LICENSE"]
-  s.files = ["spec/integration/sage_pay/server_spec.rb", "spec/sage_pay/server/address_spec.rb", "spec/sage_pay/server/notification_response_spec.rb", "spec/sage_pay/server/notification_spec.rb", "spec/sage_pay/server/registration_response_spec.rb", "spec/sage_pay/server/registration_spec.rb", "spec/sage_pay/server/signature_verification_details_spec.rb", "spec/sage_pay/server/transaction_code_spec.rb", "spec/sage_pay/server_spec.rb", "spec/sage_pay_spec.rb", "README.md", "LICENSE"]
   s.homepage = "http://github.com/bbucek/sage_pay"
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
