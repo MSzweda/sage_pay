@@ -5,7 +5,7 @@ module SagePay
 
       class_attribute :tx_type, :vps_protocol
 
-      self.vps_protocol = "2.23"
+      self.vps_protocol = "3.00"
 
       attr_accessor :mode, :vendor, :vendor_tx_code, :encryption_key
 
