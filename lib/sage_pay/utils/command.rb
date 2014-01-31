@@ -46,7 +46,7 @@ module SagePay
       end
 
       def url
-        case mode
+        case mode.try(:to_sym)
         when :showpost
           "https://test.sagepay.com/showpost/showpost.asp?Service=#{simulator_service}"
         when :direct_simulator
@@ -58,7 +58,7 @@ module SagePay
         when :live
           "https://live.sagepay.com/gateway/service/#{live_service}.vsp"
         else
-          raise ArgumentError, "Invalid transaction mode"
+          raise ArgumentError, "Invalid transaction mode #{mode}"
         end
       end
 
