@@ -7,6 +7,7 @@ module SagePay
       self.key_converter = {
         "VPSProtocol"  => :vps_protocol,
         "Status"       => :status,
+        "3DSecureStatus"       => :three_d_secure_status,
         "StatusDetail" => :status_detail,
         "TxAuthNo"     => :tx_auth_no,
         "CAVV"         => :cavv,
