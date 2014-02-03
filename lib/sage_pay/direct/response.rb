@@ -7,13 +7,17 @@ module SagePay
       self.key_converter = {
         "VPSProtocol"  => :vps_protocol,
         "Status"       => :status,
-        "3DSecureStatus"       => :three_d_secure_status,
         "StatusDetail" => :status_detail,
         "TxAuthNo"     => :tx_auth_no,
         "CAVV"         => :cavv,
         "MD"           => :md,
         "ACSURL"       => :acs_url,
-        "PAReq"        => :par_eq
+        "PAReq"        => :par_eq,
+        "AVSCV2"       => :avscv2,
+        "AddressResult"       => :address_result,
+        "PostCodeResult"       => :post_code_result,
+        "CV2Result"       => :cv2_result,
+        "3DSecureStatus"       => :three_d_secure_status,
       }
 
       self.value_converter = {
