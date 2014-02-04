@@ -23,7 +23,7 @@ module SagePay
       end
 
       def url
-        case mode
+        case mode.to_sym
         when :direct_simulator
           "https://test.sagepay.com/Simulator/VSPDirectCallback.asp"
         when :server_simulator
