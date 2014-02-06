@@ -11,7 +11,7 @@ module SagePay
       # TODO: validate format of md and pa_res
 
       def response_from_response_body(response_body)
-        SagePay::Direct::Response.from_response_body(response_body)
+        SagePay::Direct::RegistrationResponse.from_response_body(response_body)
       end
 
       def post_params
