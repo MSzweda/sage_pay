@@ -9,7 +9,6 @@ module SagePay
         "Status"       => :status,
         "StatusDetail" => :status_detail,
         "TxAuthNo"     => :tx_auth_no,
-        "CAVV"         => :cavv,
         "MD"           => :md,
         "ACSURL"       => :acs_url,
         "PAReq"        => :par_eq,
@@ -18,6 +17,7 @@ module SagePay
         "PostCodeResult"       => :post_code_result,
         "CV2Result"       => :cv2_result,
         "3DSecureStatus"       => :three_d_secure_status,
+        "CAVV"         => :cavv
       }
 
       self.value_converter = {
