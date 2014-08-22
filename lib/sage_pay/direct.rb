@@ -10,7 +10,9 @@ module SagePay
     #       :vendor => "rubaidh",
     #       :three_d_secure_term_url => "http://test.host/notification",
     #       :encryption_key => 'xxxxx',
-    #       :proxy_url => "https://some.url"
+    #       :proxy_url => "https://some.url",
+    #       :proxy_user => "username",
+    #       :proxy_password => "password"
     #     }
     #
     # ... which you'll want to stick in config/initializers/sage_pay.rb or one

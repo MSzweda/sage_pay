@@ -7,7 +7,7 @@ module SagePay
 
       self.vps_protocol = "2.23"
 
-      attr_accessor :mode, :vendor, :vendor_tx_code, :encryption_key, :proxy_url
+      attr_accessor :mode, :vendor, :vendor_tx_code, :encryption_key, :proxy_url, :proxy_user, :proxy_password
 
       validates_presence_of :vps_protocol, :mode, :tx_type, :vendor,
         :vendor_tx_code
@@ -63,22 +63,6 @@ module SagePay
         end
       end
 
-      def base_url(mode)
-        registration_options = if integration_type == :server 
-          SagePay::Server.default_registration_options
-        elsif integration_type == :direct 
-          SagePay::Direct.default_registration_options
-        end 
-        if registration_options[:proxy_url].present?
-          registration_options[:proxy_url]
-        else
-          if mode == :live
-            "https://live.sagepay.com"
-          else
-            "https://test.sagepay.com"
-          end
-        end
-      end
 
       def post_params
         raise ArgumentError, "Invalid transaction registration options (see errors hash for details)" unless valid?
@@ -96,10 +80,42 @@ module SagePay
       end
 
       private
+
+      def base_url(mode)
+        registration_options = if integration_type == :server 
+          SagePay::Server.default_registration_options
+        elsif integration_type == :direct 
+          SagePay::Direct.default_registration_options
+        end 
+        if registration_options[:proxy_url].present?
+          registration_options[:proxy_url]
+        else
+          if mode == :live
+            "https://live.sagepay.com"
+          else
+            "https://test.sagepay.com"
+          end
+        end
+      end
+
+      def http_base_auth
+        registration_options = if integration_type == :server 
+          SagePay::Server.default_registration_options
+        elsif integration_type == :direct 
+          SagePay::Direct.default_registration_options
+        end 
+        if registration_options[:proxy_user].present? && registration_options[:proxy_password].present?
+          [registration_options[:proxy_user], registration_options[:proxy_password]]
+        end
+      end
+
+
       def post
         parsed_uri = URI.parse(url)
         request = Net::HTTP::Post.new(parsed_uri.request_uri)
         request.form_data = post_params
+        base_auth_data = http_base_auth
+        request.basic_auth *base_auth_data if base_auth_data.present?
 
         http = Net::HTTP.new(parsed_uri.host, parsed_uri.port)
 
