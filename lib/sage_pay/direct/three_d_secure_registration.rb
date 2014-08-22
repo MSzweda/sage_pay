@@ -8,6 +8,8 @@ module SagePay
       validates_length_of :pa_res, maximum: 7500
       validates_length_of :md, maximum: 35
 
+      self.integration_type = :direct
+
       # TODO: validate format of md and pa_res
 
       def response_from_response_body(response_body)

@@ -3,7 +3,7 @@ module SagePay
     class Command
       include ActiveModel::Validations
 
-      class_attribute :tx_type, :vps_protocol
+      class_attribute :tx_type, :vps_protocol, :integration_type
 
       self.vps_protocol = "2.23"
 
@@ -46,19 +46,37 @@ module SagePay
       end
 
       def url
+        url_base = base_url(mode)
         case mode.try(:to_sym)
         when :showpost
-          "https://test.sagepay.com/showpost/showpost.asp?Service=#{simulator_service}"
+          "#{url_base}/showpost/showpost.asp?Service=#{simulator_service}"
         when :direct_simulator
-          "https://test.sagepay.com/simulator/VSPDirectGateway.asp"
+          "#{url_base}/simulator/VSPDirectGateway.asp"
         when :server_simulator
-          "https://test.sagepay.com/simulator/VSPServerGateway.asp?Service=#{simulator_service}"
+          "#{url_base}/simulator/VSPServerGateway.asp?Service=#{simulator_service}"
         when :test
-          "https://test.sagepay.com/gateway/service/#{live_service}.vsp"
+          "#{url_base}/gateway/service/#{live_service}.vsp"
         when :live
-          "https://live.sagepay.com/gateway/service/#{live_service}.vsp"
+          "#{url_base}/gateway/service/#{live_service}.vsp"
         else
           raise ArgumentError, "Invalid transaction mode #{mode}"
+        end
+      end
+
+      def base_url(mode)
+        registration_options = if integration_type == :server 
+          SagePay::Server.default_registration_options
+        elsif integration_type == :direct 
+          SagePay::Direct.default_registration_options
+        end 
+        if registration_options[:proxy_url].present?
+          registration_options[:proxy_url]
+        else
+          if mode == :live
+            "https://live.sagepay.com"
+          else
+            "https://test.sagepay.com"
+          end
         end
       end
 

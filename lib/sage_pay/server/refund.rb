@@ -2,6 +2,7 @@ module SagePay
   module Server
     class Refund < Utils::Command
       self.tx_type = :refund
+      self.integration_type = :server
 
       attr_accessor :currency, :description, :related_transaction
       decimal_accessor :amount

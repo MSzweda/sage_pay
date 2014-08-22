@@ -26,6 +26,7 @@ module SagePay
 
       validates :amount, :numericality => {:message => "is less than the minimum value (0.01)", :greater_than_or_equal_to => BigDecimal.new("0.01")}
       validates :amount, :numericality => {:message => "is greater than the maximum value (100,000.00)", :less_than_or_equal_to => BigDecimal.new("100000")}
+      self.integration_type = :direct
 
       def run!
         if @response.nil? || (@vendor_tx_code_sent != vendor_tx_code)
