@@ -2,10 +2,10 @@
 
 Gem::Specification.new do |s|
   s.name = "sage_pay"
-  s.version = "1.0.1"
+  s.version = "1.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Graeme Mathieson", "Bart\u{142}omiej Oleszczyk", "Piotr G\u{119}bala"]
+  s.authors = ["Graeme Mathieson", "Bart\u{142}omiej Oleszczyk", "Piotr G\u{119}bala", "Malgorzata Szweda"]
   s.date = "2013-07-05"
   s.description = "This is a Ruby library for integrating with SagePay. SagePay is a payment\ngateway for accepting credit card payments through your web app.\n"
   s.email = "mathie@woss.name"
