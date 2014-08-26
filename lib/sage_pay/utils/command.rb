@@ -82,11 +82,7 @@ module SagePay
       private
 
       def base_url(mode)
-        registration_options = if integration_type == :server 
-          SagePay::Server.default_registration_options
-        elsif integration_type == :direct 
-          SagePay::Direct.default_registration_options
-        end 
+        registration_options = class_specific_registration_options
         if registration_options[:proxy_url].present?
           registration_options[:proxy_url]
         else
@@ -99,14 +95,20 @@ module SagePay
       end
 
       def http_base_auth
-        registration_options = if integration_type == :server 
-          SagePay::Server.default_registration_options
-        elsif integration_type == :direct 
-          SagePay::Direct.default_registration_options
-        end 
+        registration_options = class_specific_registration_options
         if registration_options[:proxy_user].present? && registration_options[:proxy_password].present?
           [registration_options[:proxy_user], registration_options[:proxy_password]]
         end
+      end
+
+      def class_specific_registration_options
+        if integration_type == :server 
+          SagePay::Server.default_registration_options
+        elsif integration_type == :direct 
+          SagePay::Direct.default_registration_options
+        else
+          {}
+        end 
       end
 
 
