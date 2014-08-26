@@ -155,7 +155,7 @@ module SagePay
         attributes.each do |k, v|
           # We're only providing readers, not writers, so we have to directly
           # set the instance variable.
-          instance_variable_set("@#{k}", v)
+          instance_variable_set("@#{k}", v) if k.present?
         end
       end
 
